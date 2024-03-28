@@ -1,10 +1,11 @@
 <script setup lang="ts">
-// import Common from './components/Common.vue'
 import Login from './pages/Login.vue'
+import Register from './pages/Register.vue';
 </script>
 
 <template>
   <Login />
+  <Register />
 </template>
 
 <style scoped>
