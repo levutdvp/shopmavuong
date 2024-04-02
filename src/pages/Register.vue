@@ -1,53 +1,81 @@
 <template >
     <div class="q-pa-md" style="max-width: 400px">
-        <q-form class="q-gutter-md"  @submit="onsubmit" @reset="onReset">
-            Tên tài khoản (Để đăng nhập vào SHOP)
-            <q-input filled v-model="name" label="Nhập tài khoản" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
-            Mật khẩu
-            <q-input filled v-model="password" label="Nhập mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
-            Nhập lại mật khẩu
-            <q-input filled v-model="rePassword" label="Nhập lại mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
-            Tên hiển thị trên web (khác với tên tài khoản)
-            <q-input filled v-model="account" label="Nhập tài khoản" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
-            Email... Để dùng lấy lại mật khẩu
-            <q-input filled v-model="email" label="Email... Để dùng lấy lại mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
-            Số điện thoại... Để dùng lấy lại mật khẩu
-            <q-input filled v-model="phone" label="SĐT... Để dùng lấy lại mật khẩu"></q-input> 
+        <q-form class="q-gutter-md">
+            <p class="user-text">Tên tài khoản (Để đăng nhập vào SHOP)</p>        
+            <q-input filled v-model="form.name" label="Nhập tài khoản" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
+            <p class="pass-text">Mật khẩu</p>
+            <q-input filled v-model="form.password" type="password" label="Nhập mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
+            <p class="repass-text">Nhập lại mật khẩu</p>
+            <q-input filled v-model="form.rePassword" type="password" label="Nhập lại mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
+            <p>Tên hiển thị trên web (khác với tên tài khoản)</p>
+            <q-input filled v-model="form.account" label="Nhập tài khoản" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
+            <p class="email-text">Email... Để dùng lấy lại mật khẩu</p>
+            <q-input filled v-model="form.email" label="Email... Để dùng lấy lại mật khẩu" :rules="[val => typeof val ==='string' && val.length > 0 || 'Please type something']"></q-input> 
+            <p class="phone-text">Số điện thoại... Để dùng lấy lại mật khẩu</p>
+            <q-input filled v-model="form.phone" label="SĐT... Để dùng lấy lại mật khẩu"></q-input> 
 
             <div>
-                <q-btn label="Đăng ký" type="submit" color="red"/>
-                <q-btn label="Đăng nhập" type="reset" color="#666" flat class="q-ml-sm" />
+                <q-btn label="Đăng ký" type="submit" color="red" @submit="onRegister"/>
+                <q-btn label="Đăng nhập" type="reset" color="white" text-color="black" @submit="onLogin" flat class="q-ml-sm" />
               </div>
         </q-form>
     </div>
 </template>
 <script setup lang="ts">
 import { useQuasar } from 'quasar';
-import { ref } from 'vue';
+import { reactive} from 'vue';
+import { useRouter } from 'vue-router';
 
 const $q = useQuasar()
-const name = ref(null)
-const password = ref(null)
-const rePassword = ref(null)
-const account = ref(null)
-const email = ref(null)
-const phone = ref(null)
- const accept = ref(false)
+const router = useRouter()
 
- const onsubmit = (): void => {
+const form = reactive({
+    name: '',
+    password: '',
+    rePassword: '',
+    account: '',
+    email: '',
+    phone: null,
+})
+
+
+
+ const onRegister = (): void => {
      $q.notify({
         color: 'green-4',
         textColor: 'white',
         icon: 'cloud_done',
-        message: 'Đăng nhập thành công'
+        message: 'Đăng ký thành công'
      })
+
+     router.push('/login')
  }
 
- const onReset = (): void => {
-     accept.value = false
+ const onLogin = (): void => {
+     $q.notify({
+        color: 'green-4',
+        textColor: 'white',
+        icon: 'cloud_done',
+        message: 'Đăng nhập thành công'
+     })
+     router.push('/')
  }
 
 </script>
 <style scoped>
-    
+.user-text {
+    margin-right: 20px;
+}
+.pass-text {
+    margin-right: 220px;
+}
+.repass-text {
+    margin-right: 170px;
+}
+.email-text {
+    margin-right: 70px;
+}
+.phone-text {
+    margin-right: 35px;
+}
 </style>

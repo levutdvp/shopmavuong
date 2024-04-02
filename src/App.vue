@@ -1,11 +1,8 @@
 <script setup lang="ts">
-import Login from './pages/Login.vue'
-import Register from './pages/Register.vue';
 </script>
 
 <template>
-  <Login />
-  <Register />
+      <router-view/>
 </template>
 
 <style scoped>
