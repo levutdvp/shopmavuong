@@ -16,7 +16,7 @@
 
             <div>
                 <q-btn label="Đăng ký" type="submit" color="red" @submit="onRegister"/>
-                <q-btn label="Đăng nhập" type="reset" color="white" text-color="black" @submit="onLogin" flat class="q-ml-sm" />
+                <q-btn label="Đăng nhập" type="button" color="white" text-color="black" @submit="onLogin" flat class="q-ml-sm" />
               </div>
         </q-form>
     </div>
